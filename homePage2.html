@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Timetable Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/recharts/umd/Recharts.min.js"></script>
+    <style>
+        :root {
+            --blue-50: #eff6ff;
+            --blue-100: #dbeafe;
+            --blue-600: #2563eb;
+            --blue-700: #1d4ed8;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --green-100: #dcfce7;
+            --green-600: #16a34a;
+            --green-700: #15803d;
+            --red-100: #fee2e2;
+            --red-600: #dc2626;
+            --purple-100: #f3e8ff;
+            --purple-600: #9333ea;
+            --orange-100: #ffedd5;
+            --orange-600: #ea580c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: var(--gray-50);
+            color: var(--gray-900);
+        }
+
+        .min-h-screen {
+            min-height: 100vh;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .bg-gradient-to-br {
+            background: linear-gradient(135deg, var(--blue-50) 0%, #e0e7ff 100%);
+        }
+
+        .p-4 {
+            padding: 1rem;
+        }
+
+        .p-6 {
+            padding: 1.5rem;
+        }
+
+        .p-8 {
+            padding: 2rem;
+        }
+
+        .p-12 {
+            padding: 3rem;
+        }
+
+        .px-3 {
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+        }
+
+        .px-4 {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .px-6 {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        .py-1 {
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+        }
+
+        .py-2 {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .py-3 {
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+        }
+
+        .py-4 {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .py-8 {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+
+        .mb-2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+
+        .mb-6 {
+            margin-bottom: 1.5rem;
+        }
+
+        .mb-8 {
+            margin-bottom: 2rem;
+        }
+
+        .mt-1 {
+            margin-top: 0.25rem;
+        }
+
+        .mt-3 {
+            margin-top: 0.75rem;
+        }
+
+        .mr-2 {
+            margin-right: 0.5rem;
+        }
+
+        .ml-2 {
+            margin-left: 0.5rem;
+        }
+
+        .space-y-2 > * + * {
+            margin-top: 0.5rem;
+        }
+
+        .space-y-4 > * + * {
+            margin-top: 1rem;
+        }
+
+        .space-y-6 > * + * {
+            margin-top: 1.5rem;
+        }
+
+        .space-x-2 > * + * {
+            margin-left: 0.5rem;
+        }
+
+        .space-x-3 > * + * {
+            margin-left: 0.75rem;
+        }
+
+        .space-x-4 > * + * {
+            margin-left: 1rem;
+        }
+
+        .w-full {
+            width: 100%;
+        }
+
+        .w-64 {
+            width: 16rem;
+        }
+
+        .w-16 {
+            width: 4rem;
+        }
+
+        .w-8 {
+            width: 2rem;
+        }
+
+        .w-5 {
+            width: 1.25rem;
+        }
+
+        .w-4 {
+            width: 1rem;
+        }
+
+        .h-screen {
+            height: 100vh;
+        }
+
+        .h-16 {
+            height: 4rem;
+        }
+
+        .h-8 {
+            height: 2rem;
+        }
+
+        .h-5 {
+            height: 1.25rem;
+        }
+
+        .h-4 {
+            height: 1rem;
+        }
+
+        .h-2 {
+            height: 0.5rem;
+        }
+
+        .max-w-md {
+            max-width: 28rem;
+        }
+
+        .bg-white {
+            background-color: white;
+        }
+
+        .bg-blue-600 {
+            background-color: var(--blue-600);
+        }
+
+        .bg-green-600 {
+            background-color: var(--green-600);
+        }
+
+        .bg-purple-600 {
+            background-color: var(--purple-600);
+        }
+
+        .bg-red-600 {
+            background-color: var(--red-600);
+        }
+
+        .bg-blue-50 {
+            background-color: var(--blue-50);
+        }
+
+        .bg-green-50 {
+            background-color: var(--green-100);
+        }
+
+        .bg-purple-50 {
+            background-color: var(--purple-100);
+        }
+
+        .bg-orange-50 {
+            background-color: var(--orange-100);
+        }
+
+        .bg-gray-50 {
+            background-color: var(--gray-50);
+        }
+
+        .bg-gray-200 {
+            background-color: var(--gray-200);
+        }
+
+        .text-white {
+            color: white;
+        }
+
+        .text-gray-600 {
+            color: var(--gray-600);
+        }
+
+        .text-gray-500 {
+            color: var(--gray-500);
+        }
+
+        .text-gray-700 {
+            color: var(--gray-700);
+        }
+
+        .text-gray-900 {
+            color: var(--gray-900);
+        }
+
+        .text-blue-600 {
+            color: var(--blue-600);
+        }
+
+        .text-green-600 {
+            color: var(--green-600);
+        }
+
+        .text-red-600 {
+            color: var(--red-600);
+        }
+
+        .text-purple-600 {
+            color: var(--purple-600);
+        }
+
+        .text-orange-600 {
+            color: var(--orange-600);
+        }
+
+        .text-xs {
+            font-size: 0.75rem;
+        }
+
+        .text-sm {
+            font-size: 0.875rem;
+        }
+
+        .text-lg {
+            font-size: 1.125rem;
+        }
+
+        .text-xl {
+            font-size: 1.25rem;
+        }
+
+        .text-2xl {
+            font-size: 1.5rem;
+        }
+
+        .text-3xl {
+            font-size: 1.875rem;
+        }
+
+        .font-medium {
+            font-weight: 400;
+        }
+
+        .font-semibold {
+            font-weight: 600;
+        }
+
+        .font-bold {
+            font-weight: 700;
+        }
+
+        .rounded-lg {
+            border-radius: 0.5rem;
+        }
+
+        .rounded-xl {
+            border-radius: 0.75rem;
+        }
+
+        .rounded-2xl {
+            border-radius: 1rem;
+        }
+
+        .rounded-full {
+            border-radius: 9999px;
+        }
+
+        .border {
+            border: 1px solid var(--gray-200);
+        }
+
+        .border-b {
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .border-r {
+            border-right: 1px solid var(--gray-200);
+        }
+
+        .border-l-4 {
+            border-left-width: 4px;
+            border-left-style: solid;
+        }
+
+        .border-blue-500 {
+            border-color: var(--blue-600);
+        }
+
+        .border-green-500 {
+            border-color: var(--green-600);
+        }
+
+        .border-purple-500 {
+            border-color: var(--purple-600);
+        }
+
+        .border-orange-200 {
+            border-color: var(--orange-100);
+        }
+
+        .border-green-200 {
+            border-color: var(--green-100);
+        }
+
+        .border-red-200 {
+            border-color: var(--red-100);
+        }
+
+        .border-gray-300 {
+            border-color: var(--gray-300);
+        }
+
+        .shadow-sm {
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .shadow-2xl {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .grid {
+            display: grid;
+        }
+
+        .grid-cols-1 {
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+        }
+
+        .grid-cols-2 {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .grid-cols-3 {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .grid-cols-4 {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .gap-4 {
+            gap: 1rem;
+        }
+
+        .gap-6 {
+            gap: 1.5rem;
+        }
+
+        .overflow-hidden {
+            overflow: hidden;
+        }
+
+        .overflow-x-auto {
+            overflow-x: auto;
+        }
+
+        .overflow-y-auto {
+            overflow-y: auto;
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        .flex-1 {
+            flex: 1 1 0%;
+        }
+
+        .flex-wrap {
+            flex-wrap: wrap;
+        }
+
+        .flex-shrink-0 {
+            flex-shrink: 0;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .relative {
+            position: relative;
+        }
+
+        .absolute {
+            position: absolute;
+        }
+
+        .left-3 {
+            left: 0.75rem;
+        }
+
+        .top-1\/2 {
+            top: 50%;
+        }
+
+        .transform {
+            transform: translateY(-50%);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+
+        .divide-y > :not([hidden]) ~ :not([hidden]) {
+            border-top-width: 1px;
+        }
+
+        .divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
+            border-color: var(--gray-200);
+        }
+
+        .transition-colors {
+            transition-property: background-color, border-color, color, fill, stroke;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+        }
+
+        .hover\:bg-blue-700:hover {
+            background-color: var(--blue-700);
+        }
+
+        .hover\:bg-green-700:hover {
+            background-color: var(--green-700);
+        }
+
+        .hover\:bg-purple-700:hover {
+            background-color: #7c3aed;
+        }
+
+        .hover\:bg-gray-50:hover {
+            background-color: var(--gray-50);
+        }
+
+        .hover\:text-blue-800:hover {
+            color: #1e40af;
+        }
+
+        .hover\:text-red-800:hover {
+            color: #991b1b;
+        }
+
+        .hover\:text-gray-600:hover {
+            color: var(--gray-600);
+        }
+
+        .hover\:text-gray-700:hover {
+            color: var(--gray-700);
+        }
+
+        .focus\:ring-2:focus {
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+        }
+
+        .focus\:ring-blue-500:focus {
+            --tw-ring-color: rgba(59, 130, 246, 0.5);
+        }
+
+        .focus\:border-transparent:focus {
+            border-color: transparent;
+        }
+
+        input, select, textarea {
+            outline: none;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 0.75rem 1.5rem;
+            text-align: left;
+        }
+
+        thead th {
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            color: var(--gray-500);
+            background-color: var(--gray-50);
+        }
+
+        tbody tr {
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        /* Responsive adjustments */
+        @media (min-width: 768px) {
+            .md\:grid-cols-3 {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+            
+            .md\:grid-cols-4 {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .lg\:grid-cols-2 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+            
+            .lg\:grid-cols-3 {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- Content will be rendered here by JavaScript -->
+    </div>
+
+    <script>
+        // State management
+        const state = {
+            currentPage: 'dashboard',
+            currentUser: null,
+            selectedDepartment: 'Computer Science',
+            selectedShift: 'Morning',
+            generatedTimetables: [],
+            activeTab: 0
+        };
+
+        // Mock data
+        const utilizationData = [
+            { name: 'Occupied', value: 75, color: '#3b82f6' },
+            { name: 'Available', value: 25, color: '#e5e7eb' }
+        ];
+
+        const workloadData = [
+            { faculty: 'Dr. Smith', workload: 18, maxLoad: 20 },
+            { faculty: 'Prof. Johnson', workload: 15, maxLoad: 20 },
+            { faculty: 'Dr. Brown', workload: 22, maxLoad: 20 },
+            { faculty: 'Prof. Davis', workload: 16, maxLoad: 20 }
+        ];
+
+        const mockClassrooms = [
+            { id: 1, name: 'Room 101', capacity: 60, type: 'Theory', department: 'Computer Science', availability: 'Available' },
+            { id: 2, name: 'Lab A1', capacity: 30, type: 'Lab', department: 'Computer Science', availability: 'Occupied' },
+            { id: 3, name: 'Room 201', capacity: 80, type: 'Theory', department: 'Electronics', availability: 'Available' }
+        ];
+
+        const mockFaculty = [
+            { id: 1, name: 'Dr. Smith', department: 'Computer Science', subjects: ['Data Structures', 'Algorithms'], workload: 18 },
+            { id: 2, name: 'Prof. Johnson', department: 'Computer Science', subjects: ['Database Systems'], workload: 15 }
+        ];
+
+        // const mockTimetable = [
+        //     { time: '9:00-10:00', monday: 'Data Structures\nDr. Smith\nRoom 101', tuesday: 'Algorithms\nDr. Smith\nRoom 102', wednesday: 'Database\nProf. Johnson\nLab A1' },
+        //     { time: '10:00-11:00', monday: 'Database\nProf. Johnson\nLab A1', tuesday: 'Data Structures\nDr. Smith\nRoom 101', wednesday: 'Algorithms\nDr. Smith\nRoom 102' }
+        // ];
+        const mockTimetable = [
+  { 
+    time: '9:00-10:00',
+    monday: 'Data Structures\nDr. Smith\nRoom 101',
+    tuesday: 'Algorithms\nDr. Brown\nRoom 102',
+    wednesday: 'Database\nProf. Johnson\nLab A1',
+    thursday: 'Operating Systems\nDr. White\nRoom 201',
+    friday: 'Networks\nProf. Lee\nRoom 202'
+  },
+  { 
+    time: '10:00-11:00',
+    monday: 'Database\nProf. Johnson\nLab A1',
+    tuesday: 'Data Structures\nDr. Smith\nRoom 101',
+    wednesday: 'Algorithms\nDr. Brown\nRoom 102',
+    thursday: 'Computer Architecture\nDr. Green\nRoom 203',
+    friday: 'Software Engg.\nProf. Taylor\nRoom 204'
+  },
+  { 
+    time: '11:00-11:30',
+    monday: 'Lunch Break',
+    tuesday: 'Lunch Break',
+    wednesday: 'Lunch Break',
+    thursday: 'Lunch Break',
+    friday: 'Lunch Break'
+  },
+  { 
+    time: '11:30-12:30',
+    monday: 'Computer Architecture\nDr. Green\nRoom 203',
+    tuesday: 'Software Engg.\nProf. Taylor\nRoom 204',
+    wednesday: 'Operating Systems\nDr. White\nRoom 201',
+    thursday: 'Networks\nProf. Lee\nRoom 202',
+    friday: 'Algorithms\nDr. Brown\nRoom 102'
+  },
+  { 
+    time: '12:30-1:30',
+    monday: 'Software Engg.\nProf. Taylor\nRoom 204',
+    tuesday: 'Operating Systems\nDr. White\nRoom 201',
+    wednesday: 'Computer Architecture\nDr. Green\nRoom 203',
+    thursday: 'Data Structures\nDr. Smith\nRoom 101',
+    friday: 'Database\nProf. Johnson\nLab A1'
+  }
+];
+
+
+        // Utility functions
+        function setState(newState) {
+            Object.assign(state, newState);
+            renderApp();
+        }
+
+        function navigateTo(page) {
+            setState({ currentPage: page });
+        }
+
+        // Component rendering functions
+        function renderApp() {
+            const app = document.getElementById('app');
+            
+            if (!state.currentUser) {
+                app.innerHTML = renderLoginPage();
+                return;
+            }
+            
+            app.innerHTML = `
+                <div class="flex h-screen bg-gray-50">
+                    ${renderSidebar()}
+                    <div class="flex-1 flex flex-col overflow-hidden">
+                        ${renderHeader()}
+                        <main class="flex-1 overflow-y-auto p-6">
+                            ${renderCurrentPage()}
+                        </main>
+                    </div>
+                </div>
+            `;
+
+            // Add event listeners after rendering
+            attachEventListeners();
+        }
+
+        function renderLoginPage() {
+            return `
+                <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+                    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8">
+                        <div class="text-center mb-8">
+                            <div class="w-16 h-16 bg-blue-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-calendar-alt text-white text-2xl"></i>
+                            </div>
+                            <h1 class="text-2xl font-bold text-gray-900 mb-2">College Timetable</h1>
+                            <p class="text-gray-600">Scheduling Platform</p>
+                        </div>
+                        
+                        <form class="space-y-6" onsubmit="event.preventDefault(); setState({ currentUser: { name: 'John Admin', role: 'Admin' } });">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Role</label>
+                                <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                    <option>Admin</option>
+                                    <option>Faculty</option>
+                                    <option>Scheduling Officer</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                                <input 
+                                    type="email" 
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    placeholder="Enter your email"
+                                />
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                                <input 
+                                    type="password" 
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    placeholder="Enter your password"
+                                />
+                            </div>
+                            
+                            <button 
+                                type="submit"
+                                class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                            >
+                                Sign In
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderSidebar() {
+            return `
+                <div class="w-64 bg-white shadow-sm border-r h-screen flex flex-col">
+                    <div class="p-6 border-b">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-calendar-alt text-white"></i>
+                            </div>
+                            <div>
+                                <h2 class="font-semibold text-gray-900">SchedulePro</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <nav class="flex-1 px-4 py-6 space-y-2">
+                        ${renderNavItem('dashboard', 'home', 'Dashboard')}
+                        ${renderNavItem('classrooms', 'building', 'Classrooms')}
+                        ${renderNavItem('faculty', 'users', 'Faculty')}
+                        ${renderNavItem('subjects', 'book-open', 'Subjects & Batches')}
+                        ${renderNavItem('generate', 'clock', 'Generate Timetable')}
+                        ${renderNavItem('timetable', 'calendar', 'View Timetables')}
+                        ${renderNavItem('approval', 'check-circle', 'Approval Workflow')}
+                        ${renderNavItem('settings', 'settings', 'Settings')}
+                    </nav>
+
+                    <div class="p-4 border-t">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
+                                <i class="fas fa-user text-gray-600"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-gray-900">${state.currentUser?.name}</p>
+                                <p class="text-xs text-gray-500">${state.currentUser?.role}</p>
+                            </div>
+                        </div>
+                        <button 
+                            onclick="setState({ currentUser: null })"
+                            class="w-full flex items-center space-x-2 px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                        >
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Sign Out</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderNavItem(page, icon, text) {
+            const isActive = state.currentPage === page;
+            return `
+                <button
+                    onclick="navigateTo('${page}')"
+                    class="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors ${isActive ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-50'}"
+                >
+                    <i class="fas fa-${icon} w-5 h-5"></i>
+                    <span>${text}</span>
+                </button>
+            `;
+        }
+
+        function renderHeader() {
+            return `
+                <div class="bg-white shadow-sm border-b px-6 py-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <h1 class="text-xl font-semibold text-gray-900">
+                                ${getPageTitle()}
+                            </h1>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <button class="p-2 text-gray-400 hover:text-gray-600 transition-colors">
+                                <i class="fas fa-bell w-5 h-5"></i>
+                            </button>
+                            <div class="flex items-center space-x-2">
+                                <select 
+                                    value="${state.selectedDepartment}" 
+                                    onchange="setState({ selectedDepartment: this.value })"
+                                    class="px-3 py-1 border border-gray-300 rounded-lg text-sm"
+                                >
+                                    <option>Computer Science</option>
+                                    <option>Electronics</option>
+                                    <option>Mechanical</option>
+                                </select>
+                                <select 
+                                    value="${state.selectedShift}" 
+                                    onchange="setState({ selectedShift: this.value })"
+                                    class="px-3 py-1 border border-gray-300 rounded-lg text-sm"
+                                >
+                                    <option>Morning</option>
+                                    <option>Evening</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function getPageTitle() {
+            const titles = {
+                'dashboard': 'Dashboard',
+                'classrooms': 'Classrooms Management',
+                'faculty': 'Faculty Management',
+                'subjects': 'Subjects & Batches',
+                'generate': 'Timetable Generation',
+                'timetable': 'View Timetables',
+                'approval': 'Approval Workflow',
+                'settings': 'Settings'
+            };
+            return titles[state.currentPage] || 'Dashboard';
+        }
+
+        function renderCurrentPage() {
+            switch(state.currentPage) {
+                case 'dashboard': return renderDashboard();
+                case 'classrooms': return renderClassroomsManagement();
+                case 'faculty': return renderFacultyManagement();
+                case 'subjects': return renderSubjectsManagement();
+                case 'generate': return renderTimetableGeneration();
+                case 'timetable': return renderTimetableView();
+                case 'approval': return renderApprovalWorkflow();
+                case 'settings': return renderSettings();
+                default: return renderDashboard();
+            }
+        }
+
+        function renderDashboard() {
+            return `
+                <div class="space-y-6">
+                    <div class="flex items-center justify-between">
+                        <h1 class="text-3xl font-bold text-gray-900">Dashboard</h1>
+                        <div class="flex items-center space-x-4">
+                            <select 
+                                value="${state.selectedDepartment}" 
+                                onchange="setState({ selectedDepartment: this.value })"
+                                class="px-4 py-2 border border-gray-300 rounded-lg"
+                            >
+                                <option>Computer Science</option>
+                                <option>Electronics</option>
+                                <option>Mechanical</option>
+                            </select>
+                            <select 
+                                value="${state.selectedShift}" 
+                                onchange="setState({ selectedShift: this.value })"
+                                class="px-4 py-2 border border-gray-300 rounded-lg"
+                            >
+                                <option>Morning</option>
+                                <option>Evening</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Key Metrics -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                        <div class="bg-white p-6 rounded-xl shadow-sm border">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-600">Classroom Utilization</p>
+                                    <p class="text-2xl font-bold text-blue-600">75%</p>
+                                </div>
+                                <i class="fas fa-building text-blue-600 text-2xl"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-xl shadow-sm border">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-600">Faculty Workload</p>
+                                    <p class="text-2xl font-bold text-green-600">Balanced</p>
+                                </div>
+                                <i class="fas fa-users text-green-600 text-2xl"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-xl shadow-sm border">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-600">Conflicts Detected</p>
+                                    <p class="text-2xl font-bold text-red-600">3</p>
+                                </div>
+                                <i class="fas fa-exclamation-triangle text-red-600 text-2xl"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-xl shadow-sm border">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-600">Approval Status</p>
+                                    <p class="text-2xl font-bold text-purple-600">Pending</p>
+                                </div>
+                                <i class="fas fa-check-circle text-purple-600 text-2xl"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-xl shadow-sm border">
+                            <h3 class="text-lg font-semibold mb-4">Classroom Utilization</h3>
+                            <div id="pie-chart" style="width: 100%; height: 200px;"></div>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-xl shadow-sm border">
+                            <h3 class="text-lg font-semibold mb-4">Faculty Workload Distribution</h3>
+                            <div id="bar-chart" style="width: 100%; height: 200px;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border">
+                        <h3 class="text-lg font-semibold mb-4">Quick Actions</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <button 
+                                onclick="navigateTo('generate')"
+                                class="flex items-center justify-center space-x-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+                            >
+                                <i class="fas fa-plus w-5 h-5"></i>
+                                <span>Create Timetable</span>
+                            </button>
+                            <button 
+                                onclick="navigateTo('timetable')"
+                                class="flex items-center justify-center space-x-2 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors"
+                            >
+                                <i class="fas fa-eye w-5 h-5"></i>
+                                <span>View Timetables</span>
+                            </button>
+                            <button 
+                                onclick="navigateTo('classrooms')"
+                                class="flex items-center justify-center space-x-2 bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors"
+                            >
+                                <i class="fas fa-cog w-5 h-5"></i>
+                                <span>Manage Data</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderClassroomsManagement() {
+            return `
+                <div class="space-y-6">
+                    <div class="flex items-center justify-between">
+                        <h1 class="text-3xl font-bold text-gray-900">Classrooms Management</h1>
+                        <button class="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                            <i class="fas fa-plus w-5 h-5"></i>
+                            <span>Add Classroom</span>
+                        </button>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border overflow-hidden">
+                        <div class="p-6">
+                            <div class="flex items-center space-x-4 mb-4">
+                                <div class="relative">
+                                    <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                    <input 
+                                        type="text" 
+                                        placeholder="Search classrooms..." 
+                                        class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    />
+                                </div>
+                                <select class="px-4 py-2 border border-gray-300 rounded-lg">
+                                    <option>All Types</option>
+                                    <option>Theory</option>
+                                    <option>Lab</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Capacity</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Type</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Department</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200">
+                                    ${mockClassrooms.map(classroom => `
+                                        <tr key="${classroom.id}">
+                                            <td class="px-6 py-4 whitespace-nowrap font-medium">${classroom.name}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">${classroom.capacity}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="px-2 py-1 text-xs rounded-full ${classroom.type === 'Lab' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800'}">
+                                                    ${classroom.type}
+                                                </span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">${classroom.department}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="px-2 py-1 text-xs rounded-full ${classroom.availability === 'Available' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+                                                    ${classroom.availability}
+                                                </span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="flex items-center space-x-2">
+                                                    <button class="text-blue-600 hover:text-blue-800">
+                                                        <i class="fas fa-edit w-4 h-4"></i>
+                                                    </button>
+                                                    <button class="text-red-600 hover:text-red-800">
+                                                        <i class="fas fa-trash-alt w-4 h-4"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderFacultyManagement() {
+            return `
+                <div class="space-y-6">
+                    <div class="flex items-center justify-between">
+                        <h1 class="text-3xl font-bold text-gray-900">Faculty Management</h1>
+                        <button class="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                            <i class="fas fa-plus w-5 h-5"></i>
+                            <span>Add Faculty</span>
+                        </button>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Department</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Subjects</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Current Workload</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200">
+                                    ${mockFaculty.map(faculty => `
+                                        <tr key="${faculty.id}">
+                                            <td class="px-6 py-4 whitespace-nowrap font-medium">${faculty.name}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">${faculty.department}</td>
+                                            <td class="px-6 py-4">
+                                                <div class="flex flex-wrap gap-1">
+                                                    ${faculty.subjects.map(subject => `
+                                                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
+                                                            ${subject}
+                                                        </span>
+                                                    `).join('')}
+                                                </div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="flex items-center">
+                                                    <span class="mr-2">${faculty.workload}/20 hrs</span>
+                                                    <div class="w-24 bg-gray-200 rounded-full h-2">
+                                                        <div 
+                                                            class="h-2 rounded-full ${faculty.workload > 20 ? 'bg-red-500' : 'bg-green-500'}"
+                                                            style="width: ${(faculty.workload / 20) * 100}%"
+                                                        ></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="flex items-center space-x-2">
+                                                    <button class="text-blue-600 hover:text-blue-800">
+                                                        <i class="fas fa-edit w-4 h-4"></i>
+                                                    </button>
+                                                    <button class="text-red-600 hover:text-red-800">
+                                                        <i class="fas fa-trash-alt w-4 h-4"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderTimetableGeneration() {
+            return `
+                <div class="space-y-6">
+                    <div class="flex items-center justify-between">
+                        <h1 class="text-3xl font-bold text-gray-900">Timetable Generation</h1>
+                        <button 
+                            onclick="generateTimetables()"
+                            class="flex items-center space-x-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+                        >
+                            <i class="fas fa-clock w-5 h-5"></i>
+                            <span>Generate Timetable</span>
+                        </button>
+                    </div>
+
+                    ${state.generatedTimetables.length === 0 ? `
+                        <div class="bg-white p-12 rounded-xl shadow-sm border text-center">
+                            <i class="fas fa-calendar-alt text-gray-400 text-4xl mx-auto mb-4"></i>
+                            <h3 class="text-xl font-semibold text-gray-600 mb-2">No Timetables Generated</h3>
+                            <p class="text-gray-500">Click "Generate Timetable" to create scheduling options</p>
+                        </div>
+                    ` : `
+                        <div class="bg-white rounded-xl shadow-sm border">
+                            <div class="border-b border-gray-200">
+                                <nav class="flex">
+                                    ${state.generatedTimetables.map((timetable, index) => `
+                                        <button
+                                            onclick="setState({ activeTab: ${index} })"
+                                            class="px-6 py-4 text-sm font-medium border-b-2 ${state.activeTab === index ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700'}"
+                                        >
+                                            ${timetable.name}
+                                            ${timetable.conflicts > 0 ? `
+                                                <span class="ml-2 px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">
+                                                    ${timetable.conflicts} conflicts
+                                                </span>
+                                            ` : ''}
+                                        </button>
+                                    `).join('')}
+                                </nav>
+                            </div>
+
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-6">
+                                    <div class="flex items-center space-x-4">
+                                        <span class="text-sm text-gray-600">
+                                            Utilization: <span class="font-medium">${state.generatedTimetables[state.activeTab]?.utilization}%</span>
+                                        </span>
+                                        <span class="text-sm text-gray-600">
+                                            Conflicts: <span class="font-medium ${state.generatedTimetables[state.activeTab]?.conflicts > 0 ? 'text-red-600' : 'text-green-600'}">
+                                                ${state.generatedTimetables[state.activeTab]?.conflicts}
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <button class="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+                                            <i class="fas fa-download w-4 h-4"></i>
+                                            <span>Export</span>
+                                        </button>
+                                        <button class="flex items-center space-x-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
+                                            <i class="fas fa-paper-plane w-4 h-4"></i>
+                                            <span>Send for Approval</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                ${renderTimetableView()}
+                            </div>
+                        </div>
+                    `}
+                </div>
+            `;
+        }
+
+        function renderTimetableView() {
+            return `
+                <div class="overflow-x-auto">
+                    <table class="w-full border border-gray-300">
+                        <thead>
+                            <tr class="bg-gray-50">
+                                <th class="border border-gray-300 px-4 py-2 text-left font-medium">Time</th>
+                                <th class="border border-gray-300 px-4 py-2 text-left font-medium">Monday</th>
+                                <th class="border border-gray-300 px-4 py-2 text-left font-medium">Tuesday</th>
+                                <th class="border border-gray-300 px-4 py-2 text-left font-medium">Wednesday</th>
+                                <th class="border border-gray-300 px-4 py-2 text-left font-medium">Thursday</th>
+                                <th class="border border-gray-300 px-4 py-2 text-left font-medium">Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${mockTimetable.map((row, index) => `
+                                <tr key="${index}">
+                                    <td class="border border-gray-300 px-4 py-8 font-medium bg-gray-50">${row.time}</td>
+                                    <td class="border border-gray-300 px-4 py-4">
+                                        ${row.monday ? `
+                                            <div class="bg-blue-50 p-3 px-3 py-2 rounded-lg border-l-4 border-blue-500">
+                                                ${row.monday.split('\n').map((line, i) => `
+                                                    <div class="${i === 0 ? 'font-medium' : 'text-sm text-gray-600'}">
+                                                        ${line}
+                                                    </div>
+                                                `).join('')}
+                                            </div>
+                                        ` : ''}
+                                    </td>
+                                    <td class="border border-gray-300 px-4 py-4">
+                                        ${row.tuesday ? `
+                                            <div class="bg-green-50 p-3 px-3 py-2 rounded-lg border-l-4 border-green-500">
+                                                ${row.tuesday.split('\n').map((line, i) => `
+                                                    <div class="${i === 0 ? 'font-medium' : 'text-sm text-gray-600'}">
+                                                        ${line}
+                                                    </div>
+                                                `).join('')}
+                                            </div>
+                                        ` : ''}
+                                    </td>
+                                    <td class="border border-gray-300 px-4 py-4">
+                                        ${row.wednesday ? `
+                                            <div class="bg-purple-50 p-3 px-3 py-2 rounded-lg border-l-4 border-purple-500">
+                                                ${row.wednesday.split('\n').map((line, i) => `
+                                                    <div class="${i === 0 ? 'font-medium' : 'text-sm text-gray-600'}">
+                                                        ${line}
+                                                    </div>
+                                                `).join('')}
+                                            </div>
+                                        ` : ''}
+                                    </td>
+                                    <td class="border border-gray-300 px-4 py-4">
+                                        ${row.thursday ? `
+                                            <div class="bg-green-50 p-3 px-3 py-2 rounded-lg border-l-4 border-purple-500">
+                                                ${row.thursday.split('\n').map((line, i) => `
+                                                    <div class="${i === 0 ? 'font-medium' : 'text-sm text-gray-600'}">
+                                                        ${line}
+                                                    </div>
+                                                `).join('')}
+                                            </div>
+                                        ` : ''}
+                                    </td>
+                                    <td class="border border-gray-300 px-4 py-4">
+                                        ${row.friday ? `
+                                            <div class="bg-purple-50 p-3 px-3 py-2  rounded-lg border-l-4 border-purple-500">
+                                                ${row.friday.split('\n').map((line, i) => `
+                                                    <div class="${i === 0 ? 'font-sm' : 'text-sm text-gray-600 px-1'}">
+                                                        ${line}
+                                                    </div>
+                                                `).join('')}
+                                            </div>
+                                        ` : ''}
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        function renderSubjectsManagement() {
+            return `
+                <div class="space-y-6">
+                    <div class="flex items-center justify-between">
+                        <h1 class="text-3xl font-bold text-gray-900">Subjects & Batches</h1>
+                        <button class="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                            <i class="fas fa-plus w-5 h-5"></i>
+                            <span>Add Subject</span>
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="bg-white rounded-xl shadow-sm border p-6">
+                            <h3 class="text-lg font-semibold mb-4">Subject Configuration</h3>
+                            <form class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Subject Name</label>
+                                    <input 
+                                        type="text" 
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                        placeholder="Enter subject name"
+                                    />
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Semester</label>
+                                        <select class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                                            <option>1st Semester</option>
+                                            <option>2nd Semester</option>
+                                            <option>3rd Semester</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Subject Type</label>
+                                        <select class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                                            <option>Theory</option>
+                                            <option>Lab</option>
+                                            <option>Both</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Classes per Week</label>
+                                        <input 
+                                            type="number" 
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                                            placeholder="5"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Max per Day</label>
+                                        <input 
+                                            type="number" 
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                                            placeholder="2"
+                                        />
+                                    </div>
+                                </div>
+                                <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                    Add Subject
+                                </button>
+                            </form>
+                        </div>
+
+                        <div class="bg-white rounded-xl shadow-sm border p-6">
+                            <h3 class="text-lg font-semibold mb-4">Batch Configuration</h3>
+                            <form class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Number of Batches</label>
+                                    <input 
+                                        type="number" 
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                                        placeholder="3"
+                                    />
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Students per Batch</label>
+                                    <input 
+                                        type="number" 
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                                        placeholder="30"
+                                    />
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Electives Configuration</label>
+                                    <textarea 
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                                        rows="3"
+                                        placeholder="Enter elective subjects..."
+                                    ></textarea>
+                                </div>
+                                <button type="submit" class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                    Configure Batches
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderApprovalWorkflow() {
+            return `
+                <div class="space-y-6">
+                    <div class="flex items-center justify-between">
+                        <h1 class="text-3xl font-bold text-gray-900">Approval Workflow</h1>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="bg-white rounded-xl shadow-sm border p-6">
+                            <h3 class="text-lg font-semibold mb-4 text-orange-600">Pending Approval</h3>
+                            <div class="space-y-4">
+                                <div class="p-4 border border-orange-200 bg-orange-50 rounded-lg">
+                                    <h4 class="font-medium">CS Semester 3 - Morning</h4>
+                                    <p class="text-sm text-gray-600 mt-1">Generated: 2 hours ago</p>
+                                    <p class="text-sm text-gray-600">Conflicts: 1</p>
+                                    <div class="flex space-x-2 mt-3">
+                                        <button class="px-3 py-1 bg-green-600 text-white text-xs rounded hover:bg-green-700">
+                                            Approve
+                                        </button>
+                                        <button class="px-3 py-1 bg-red-600 text-white text-xs rounded hover:bg-red-700">
+                                            Reject
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-xl shadow-sm border p-6">
+                            <h3 class="text-lg font-semibold mb-4 text-green-600">Approved</h3>
+                            <div class="space-y-4">
+                                <div class="p-4 border border-green-200 bg-green-50 rounded-lg">
+                                    <h4 class="font-medium">CS Semester 1 - Morning</h4>
+                                    <p class="text-sm text-gray-600 mt-1">Approved: 1 day ago</p>
+                                    <p class="text-sm text-gray-600">Status: Active</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-xl shadow-sm border p-6">
+                            <h3 class="text-lg font-semibold mb-4 text-red-600">Rejected</h3>
+                            <div class="space-y-4">
+                                <div class="p-4 border border-red-200 bg-red-50 rounded-lg">
+                                    <h4 class="font-medium">EE Semester 2 - Evening</h4>
+                                    <p class="text-sm text-gray-600 mt-1">Rejected: 3 days ago</p>
+                                    <p class="text-sm text-gray-600">Reason: Too many conflicts</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border p-6">
+                        <h3 class="text-lg font-semibold mb-4">Comments & Suggestions</h3>
+                        <div class="space-y-4">
+                            <div class="p-4 bg-gray-50 rounded-lg">
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                                        <span class="text-white text-sm font-medium">JD</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center space-x-2">
+                                            <span class="font-medium">John Doe</span>
+                                            <span class="text-sm text-gray-500">2 hours ago</span>
+                                        </div>
+                                        <p class="text-gray-700 mt-1">The conflict in Room 101 on Monday 10 AM needs to be resolved before approval.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <input 
+                                    type="text" 
+                                    class="flex-1 px-3 py-2 border border-gray-300 rounded-lg"
+                                    placeholder="Add a comment..."
+                                />
+                                <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                                    Post
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderSettings() {
+            return `
+                <div class="space-y-6">
+                    <div class="flex items-center justify-between">
+                        <h1 class="text-3xl font-bold text-gray-900">Settings</h1>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="bg-white rounded-xl shadow-sm border p-6">
+                            <h3 class="text-lg font-semibold mb-4">General Constraints</h3>
+                            <form class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Max Classes per Day</label>
+                                    <input 
+                                        type="number" 
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                                        value="6"
+                                    />
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Break Duration (minutes)</label>
+                                    <input 
+                                        type="number" 
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                                        value="15"
+                                    />
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Lunch Break Start</label>
+                                    <input 
+                                        type="time" 
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                                        value="13:00"
+                                    />
+                                </div>
+                                <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                    Save Constraints
+                                </button>
+                            </form>
+                        </div>
+
+                        <div class="bg-white rounded-xl shadow-sm border p-6">
+                            <h3 class="text-lg font-semibold mb-4">System Preferences</h3>
+                            <form class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <label class="text-sm font-medium text-gray-700">Auto-generate timetables</label>
+                                    <input type="checkbox" class="h-4 w-4 text-blue-600" />
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <label class="text-sm font-medium text-gray-700">Email notifications</label>
+                                    <input type="checkbox" class="h-4 w-4 text-blue-600" checked />
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <label class="text-sm font-medium text-gray-700">Allow department overlap</label>
+                                    <input type="checkbox" class="h-4 w-4 text-blue-600" />
+                                </div>
+                                <button type="submit" class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                    Save Preferences
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function generateTimetables() {
+            setState({
+                generatedTimetables: [
+                    { id: 1, name: 'Option 1', conflicts: 0, utilization: 85 },
+                    { id: 2, name: 'Option 2', conflicts: 2, utilization: 78 },
+                    { id: 3, name: 'Option 3', conflicts: 1, utilization: 92 }
+                ]
+            });
+        }
+
+        function renderCharts() {
+            // Render pie chart
+            if (document.getElementById('pie-chart')) {
+                const { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } = Recharts;
+                
+                ReactDOM.render(
+                    React.createElement(ResponsiveContainer, { width: "100%", height: 200 },
+                        React.createElement(PieChart, null,
+                            React.createElement(Pie, {
+                                data: utilizationData,
+                                cx: "50%",
+                                cy: "50%",
+                                innerRadius: 60,
+                                outerRadius: 80,
+                                dataKey: "value"
+                            }, utilizationData.map((entry, index) => React.createElement(Cell, { key: `cell-${index}`, fill: entry.color }))),
+                            React.createElement(Tooltip, null)
+                        )
+                    ),
+                    document.getElementById('pie-chart')
+                );
+            }
+            
+            // Render bar chart
+            if (document.getElementById('bar-chart')) {
+                const { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } = Recharts;
+                
+                ReactDOM.render(
+                    React.createElement(ResponsiveContainer, { width: "100%", height: 200 },
+                        React.createElement(BarChart, { data: workloadData },
+                            React.createElement(CartesianGrid, { strokeDasharray: "3 3" }),
+                            React.createElement(XAxis, { dataKey: "faculty" }),
+                            React.createElement(YAxis, null),
+                            React.createElement(Tooltip, null),
+                            React.createElement(Bar, { dataKey: "workload", fill: "#3b82f6" }),
+                            React.createElement(Bar, { dataKey: "maxLoad", fill: "#e5e7eb" })
+                        )
+                    ),
+                    document.getElementById('bar-chart')
+                );
+            }
+        }
+
+        function attachEventListeners() {
+            // Add any additional event listeners needed after rendering
+            renderCharts();
+        }
+
+        // Initialize the app
+        renderApp();
+    </script>
+</body>
+</html>

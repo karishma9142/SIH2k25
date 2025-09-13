@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered College Timetable Scheduling Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="text-2xl font-bold text-indigo-600">📅 SchedulePro</div>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-indigo-600 transition-colors">Home</a>
+                    <a href="#features" class="text-gray-700 hover:text-indigo-600 transition-colors">Features</a>
+                    <a href="#benefits" class="text-gray-700 hover:text-indigo-600 transition-colors">Benefits</a>
+                    <a href="#contact" class="text-gray-700 hover:text-indigo-600 transition-colors">Contact</a>
+                </div>
+                <a href="homePage2.html" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors">
+                    Login
+                </a>                
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="gradient-bg text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h1 class="text-5xl font-bold mb-6 leading-tight">
+                        AI-Powered Timetable Scheduling for Colleges
+                    </h1>
+                    <p class="text-xl mb-8 text-indigo-100">
+                        Generate clash-free, optimized schedules in minutes.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="homePage2.html" class="bg-white text-indigo-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                            Get Started
+                        </a>
+                        <button class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-indigo-600 transition-colors">
+                            Request Demo
+                        </button>
+                    </div>
+                </div>
+                <div class="flex justify-center">
+                   <img class="rounded-md" src="./timetable.png" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">The Scheduling Challenge</h2>
+                <p class="text-lg text-gray-600">Manual scheduling creates chaos. Here's why:</p>
+            </div>
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">⚠️</span>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Schedule Clashes</h3>
+                    <p class="text-gray-600 text-sm">Overlapping classes and resource conflicts</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">📉</span>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Poor Utilization</h3>
+                    <p class="text-gray-600 text-sm">Classrooms and labs sitting empty</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">⚖️</span>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Workload Imbalance</h3>
+                    <p class="text-gray-600 text-sm">Uneven distribution of teaching hours</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">⏰</span>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Time Consuming</h3>
+                    <p class="text-gray-600 text-sm">Hours spent on manual coordination</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold text-gray-900 mb-6">
+                        Smarter Scheduling for Faculty & Students
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-8">
+                        Our AI-powered platform automatically generates optimized timetables that eliminate conflicts, 
+                        maximize resource utilization, and ensure balanced workloads across all departments.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-white text-sm">✓</span>
+                            </div>
+                            <span class="text-gray-700">Instant conflict detection and resolution</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-white text-sm">✓</span>
+                            </div>
+                            <span class="text-gray-700">Automated resource optimization</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-white text-sm">✓</span>
+                            </div>
+                            <span class="text-gray-700">Real-time schedule updates</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <!-- Dashboard Mockup -->
+                    <div class="border-2 border-gray-200 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-semibold text-gray-800">Dashboard Overview</h3>
+                            <span class="text-green-500 text-sm">● Live</span>
+                        </div>
+                        <div class="grid grid-cols-7 gap-1 mb-4">
+                            <div class="text-xs text-gray-500 text-center py-2">Mon</div>
+                            <div class="text-xs text-gray-500 text-center py-2">Tue</div>
+                            <div class="text-xs text-gray-500 text-center py-2">Wed</div>
+                            <div class="text-xs text-gray-500 text-center py-2">Thu</div>
+                            <div class="text-xs text-gray-500 text-center py-2">Fri</div>
+                            <div class="text-xs text-gray-500 text-center py-2">Sat</div>
+                            <div class="text-xs text-gray-500 text-center py-2">Sun</div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="bg-blue-100 p-2 rounded text-xs">
+                                <div class="font-medium">9:00 AM - Mathematics</div>
+                                <div class="text-gray-600">Room 101 • Prof. Smith</div>
+                            </div>
+                            <div class="bg-green-100 p-2 rounded text-xs">
+                                <div class="font-medium">11:00 AM - Physics Lab</div>
+                                <div class="text-gray-600">Lab 201 • Dr. Johnson</div>
+                            </div>
+                            <div class="bg-purple-100 p-2 rounded text-xs">
+                                <div class="font-medium">2:00 PM - Chemistry</div>
+                                <div class="text-gray-600">Room 305 • Prof. Davis</div>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-center">
+                            <div class="text-xs text-gray-500">Utilization: 87% • Conflicts: 0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Powerful Features</h2>
+                <p class="text-lg text-gray-600">Everything you need for efficient scheduling</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover border border-gray-100">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl">👤</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Role-based Login</h3>
+                    <p class="text-gray-600">Secure access for administrators, faculty, and students with customized dashboards.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover border border-gray-100">
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl">🎯</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Optimized Timetables</h3>
+                    <p class="text-gray-600">AI-generated schedules that maximize efficiency and minimize conflicts automatically.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover border border-gray-100">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl">🏢</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Multi-department Support</h3>
+                    <p class="text-gray-600">Coordinate schedules across multiple departments and faculties seamlessly.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover border border-gray-100">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl">✅</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Review & Approval</h3>
+                    <p class="text-gray-600">Streamlined workflow for schedule review, feedback, and final approval processes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Key Benefits</h2>
+                <p class="text-lg text-gray-600">Transform your institution's scheduling efficiency</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="space-y-6">
+                    <div class="flex items-start">
+                        <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-4 mt-1">
+                            <span class="text-white text-sm">✓</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Maximized Classroom Use</h3>
+                            <p class="text-gray-600">Optimize room utilization with intelligent space allocation and scheduling.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-4 mt-1">
+                            <span class="text-white text-sm">✓</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Balanced Faculty Workload</h3>
+                            <p class="text-gray-600">Ensure fair distribution of teaching hours and administrative responsibilities.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <div class="flex items-start">
+                        <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-4 mt-1">
+                            <span class="text-white text-sm">✓</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Student-Centric Scheduling</h3>
+                            <p class="text-gray-600">Create schedules that prioritize student convenience and learning outcomes.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-4 mt-1">
+                            <span class="text-white text-sm">✓</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">NEP 2020 Flexibility</h3>
+                            <p class="text-gray-600">Support for flexible curriculum structures and interdisciplinary programs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call-to-Action Section -->
+    <section class="py-16 gradient-bg text-white">
+        <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold mb-6">Ready to Transform Scheduling?</h2>
+            <p class="text-xl mb-8 text-indigo-100">
+                Join hundreds of colleges already using our platform to streamline their scheduling process.
+            </p>
+            <button class="bg-white text-indigo-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors">
+                Request Demo
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="text-2xl font-bold mb-4">📅 SchedulePro</div>
+                    <p class="text-gray-400">AI-powered scheduling solutions for modern educational institutions.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#features" class="text-gray-400 hover:text-white transition-colors">Features</a></li>
+                        <li><a href="#benefits" class="text-gray-400 hover:text-white transition-colors">Benefits</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Documentation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Training</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">About</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact Info</h3>
+                    <div class="space-y-2 text-gray-400">
+                        <p>📧 info@schedulepro.edu</p>
+                        <p>📞 +1 (555) 123-4567</p>
+                        <p>🏢 Education Technology Center</p>
+                        <p>123 Innovation Drive</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 SchedulePro. All rights reserved. | Empowering Educational Excellence</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Button click handlers
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function() {
+                if (this.textContent.includes('Get Started')) {
+                    alert('Welcome! Getting started with SchedulePro - redirecting to registration...');
+                } else if (this.textContent.includes('Request Demo')) {
+                    alert('Demo requested! Our team will contact you within 24 hours to schedule your personalized demonstration.');
+                } else if (this.textContent.includes('Login')) {
+                    alert('Redirecting to secure login portal...');
+                }
+            });
+        });
+
+        // Add scroll effect to navbar
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg');
+            } else {
+                navbar.classList.remove('shadow-lg');
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97e8c194e0b8c172',t:'MTc1Nzc3ODE2NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
